@@ -1,10 +1,10 @@
 import React from "react";
 import { View, Text, StyleSheet } from "react-native";
 
-const CategoryRecepiesScreen = () => {
+const RecipeDetailsScreen = () => {
   return (
     <View style={styles.screen}>
-      <Text>This is the Category Recepies screen!</Text>
+      <Text>This is the Recepie Details screen!</Text>
     </View>
   );
 };
@@ -17,4 +17,4 @@ const styles = StyleSheet.create({
   },
 });
 
-export default CategoryRecepiesScreen;
+export default RecipeDetailsScreen;
