@@ -1,15 +1,27 @@
 import React from "react";
-import { View, Text, StyleSheet, Button } from "react-native";
+import { View, Text, StyleSheet, FlatList } from "react-native";
+
+import { RECIPES } from "../data/seed";
 
 const CategoryRecipiesScreen = ({ navigation }) => {
+  const renderRecipe = ({ item }) => {
+    return (
+      <View>
+        <Text>{item.title}</Text>
+      </View>
+    );
+  };
+
+  const categoryId = navigation.getParam("id");
+  const categoryRecipies = RECIPES.filter(
+    (r) => !!r.categoryIds.find((id) => id === categoryId)
+  );
   return (
     <View style={styles.screen}>
-      <Text>This is the {navigation.getParam("title")} Recepies screen!</Text>
-      <Button
-        title="Go to details"
-        onPress={() => {
-          navigation.navigate("RecipeDetails");
-        }}
+      <FlatList
+        data={categoryRecipies}
+        keyExtractor={(item) => item.id}
+        renderItem={renderRecipe}
       />
     </View>
   );
