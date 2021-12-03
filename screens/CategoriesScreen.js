@@ -1,34 +1,24 @@
 import React from "react";
-import {
-  View,
-  Text,
-  StyleSheet,
-  FlatList,
-  TouchableOpacity,
-  Platform,
-} from "react-native";
+import { View, Text, StyleSheet, FlatList } from "react-native";
+import CategoryGridItem from "../components/CategoryGridItem";
 import { CATEGORIES } from "../data/seed";
-import colors from "../style/theme/colors";
-
-const CategoryGrid = (onPress = () => {}) => {
-  return ({ item }) => (
-    <TouchableOpacity onPress={onPress(item)} style={styles.category}>
-      <View>
-        <Text>{item.title}</Text>
-      </View>
-    </TouchableOpacity>
-  );
-};
 
 const CategoriesScreen = ({ navigation }) => {
-  const handleCategoryPress = (category) => () => {
-    navigation.navigate("CategoryRecipies", { ...category });
+  const renderCategoryGridItem = ({ item }) => {
+    return (
+      <CategoryGridItem
+        category={item}
+        onPress={() => {
+          navigation.navigate("CategoryRecipies", { ...item });
+        }}
+      />
+    );
   };
 
   return (
     <FlatList
       data={CATEGORIES}
-      renderItem={CategoryGrid(handleCategoryPress)}
+      renderItem={renderCategoryGridItem}
       keyExtractor={(item) => item.id}
       numColumns={2}
     />
@@ -44,11 +34,6 @@ const styles = StyleSheet.create({
     flex: 1,
     justifyContent: "center",
     alignItems: "center",
-  },
-  category: {
-    flex: 1,
-    height: 150,
-    margin: 15,
   },
 });
 
