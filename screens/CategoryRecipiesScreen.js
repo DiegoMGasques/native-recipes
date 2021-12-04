@@ -1,14 +1,18 @@
 import React from "react";
 import { View, Text, StyleSheet, FlatList } from "react-native";
+import RecipeListItem from "../components/RecipeListItem";
 
 import { RECIPES } from "../data/seed";
 
 const CategoryRecipiesScreen = ({ navigation }) => {
   const renderRecipe = ({ item }) => {
     return (
-      <View>
-        <Text>{item.title}</Text>
-      </View>
+      <RecipeListItem
+        recipe={item}
+        onPress={() => {
+          navigation.navigate("RecipeDetails", { recipe: item });
+        }}
+      />
     );
   };
 
@@ -22,6 +26,7 @@ const CategoryRecipiesScreen = ({ navigation }) => {
         data={categoryRecipies}
         keyExtractor={(item) => item.id}
         renderItem={renderRecipe}
+        contentContainerStyle={{ alignItems: "center" }}
       />
     </View>
   );
